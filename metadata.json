@@ -1,0 +1,5 @@
+{
+  "name": "Championnat de Domino",
+  "description": "Une application d'affichage pour un championnat de domino à 16 équipes.",
+  "requestFramePermissions": []
+}
