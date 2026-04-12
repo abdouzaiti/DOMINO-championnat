@@ -304,7 +304,7 @@ export default function App() {
                 </div>
                 <div>
                   <h1 className="text-lg md:text-2xl font-black tracking-tighter italic bg-gradient-to-r from-neon-green via-white to-neon-light bg-clip-text text-transparent">
-                    بطل الدومينو
+                    TOURNOIS DE DOMINO
                   </h1>
                   <div className="flex items-center gap-2">
                     <span className="h-1 w-1 md:h-1.5 md:w-1.5 rounded-full bg-neon-green animate-pulse" />
@@ -439,7 +439,7 @@ export default function App() {
                 </motion.div>
 
                 <h2 className="text-4xl md:text-8xl font-black italic tracking-tighter mb-6 md:mb-8 bg-gradient-to-b from-white via-white to-white/20 bg-clip-text text-transparent leading-[1.1]">
-                  بطولة الدومينو
+                  TOURNOIS DE DOMINO
                 </h2>
                 
                 <p className="text-lg md:text-2xl text-white/80 font-medium mb-10 md:mb-12 max-w-2xl leading-relaxed px-4">
