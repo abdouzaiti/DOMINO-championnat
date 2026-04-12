@@ -16,33 +16,33 @@ export const TEAMS: Team[] = [
   },
   {
     id: 'team-3',
-    name: "ABDELLAH & NASRO",
-    players: [{ id: 'p3-1', name: "ABDELLAH" }, { id: 'p3-2', name: "NASRO" }]
+    name: "DJALIL & ABDENNOUR",
+    players: [{ id: 'p3-1', name: "DJALIL" }, { id: 'p3-2', name: "ABDENNOUR" }]
   },
   {
     id: 'team-4',
-    name: "AHMED & YASSER",
-    players: [{ id: 'p4-1', name: "AHMED" }, { id: 'p4-2', name: "YASSER" }]
+    name: "ZIDOURI & ISLAM",
+    players: [{ id: 'p4-1', name: "ZIDOURI" }, { id: 'p4-2', name: "ISLAM" }]
   },
   {
     id: 'team-5',
-    name: "ABDENNOUR & DJALIL",
-    players: [{ id: 'p5-1', name: "DJALIL" }, { id: 'p5-2', name: "ABDENNOUR" }]
+    name: "ACHREF & BAKI",
+    players: [{ id: 'p5-1', name: "BAKI" }, { id: 'p5-2', name: "ACHREF" }]
   },
   {
     id: 'team-6',
-    name: "",
-    players: [{ id: 'p6-1', name: "Paul Vincent" }, { id: 'p6-2', name: "Sarah Marchand" }]
+    name: ".......",
+    players: [{ id: 'p6-1', name: "....." }, { id: 'p6-2', name: "......" }]
   },
   {
     id: 'team-7',
-    name: "The Blockers",
-    players: [{ id: 'p7-1', name: "Lucas Muller" }, { id: 'p7-2', name: "Inès Fontaine" }]
+    name: "ABDELLAH & NASRO",
+    players: [{ id: 'p7-1', name: "ABDELLAH" }, { id: 'p7-2', name: "NASRO" }]
   },
   {
     id: 'team-8',
-    name: "Elite Dominators",
-    players: [{ id: 'p8-1', name: "Hugo Chevalier" }, { id: 'p8-2', name: "Manon Leroy" }]
+    name: "AHMED & YASSER",
+    players: [{ id: 'p8-1', name: "AHMED" }, { id: 'p8-2', name: "YASSER" }]
   }
 ];
 // =============================================================================
