@@ -11,27 +11,27 @@ export const TEAMS: Team[] = [
   },
   {
     id: 'team-2',
-    name: "ACHREF & BAKI",
-    players: [{ id: 'p2-1', name: "ACHRAF" }, { id: 'p2-2', name: "BAKI" }]
+    name: "HOUSSAM & MAROUANE",
+    players: [{ id: 'p2-1', name: "HOUSSAM" }, { id: 'p2-2', name: "MAROUANE" }]
   },
   {
     id: 'team-3',
-    name: "Les As du Tapis",
-    players: [{ id: 'p3-1', name: "Antoine Morel" }, { id: 'p3-2', name: "Léa Roux" }]
+    name: "ABDELLAH & NASRO",
+    players: [{ id: 'p3-1', name: "ABDELLAH" }, { id: 'p3-2', name: "NASRO" }]
   },
   {
     id: 'team-4',
-    name: "Tactical Bones",
-    players: [{ id: 'p4-1', name: "Nicolas Simon" }, { id: 'p4-2', name: "Emma Garcia" }]
+    name: "AHMED & YASSER",
+    players: [{ id: 'p4-1', name: "AHMED" }, { id: 'p4-2', name: "YASSER" }]
   },
   {
     id: 'team-5',
-    name: "Power Pair",
-    players: [{ id: 'p5-1', name: "David Michel" }, { id: 'p5-2', name: "Chloé Denis" }]
+    name: "ABDENNOUR & DJALIL",
+    players: [{ id: 'p5-1', name: "DJALIL" }, { id: 'p5-2', name: "ABDENNOUR" }]
   },
   {
     id: 'team-6',
-    name: "Strategic Slam",
+    name: "",
     players: [{ id: 'p6-1', name: "Paul Vincent" }, { id: 'p6-2', name: "Sarah Marchand" }]
   },
   {
