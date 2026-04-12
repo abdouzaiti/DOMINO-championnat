@@ -19,6 +19,8 @@ import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { GlowCard } from '@/components/ui/spotlight-card';
+import { LiquidAurora } from '@/components/ui/liquid-aurora';
 import { TEAMS, INITIAL_MATCHES } from './data';
 import { Team, Match } from './types';
 import { cn } from '@/lib/utils';
@@ -52,52 +54,61 @@ interface MatchCardProps {
 const MatchCard = ({ match, teams }: MatchCardProps) => {
   const team1 = teams.find(t => t.id === match.team1Id);
   const team2 = teams.find(t => t.id === match.team2Id);
+  const isBracket = match.round !== undefined; // Simple check if we are in bracket view
 
   return (
-    <Card className="overflow-hidden bg-black/60 border border-white/10 hover:border-neon-green/40 transition-all duration-300 rounded-xl group w-full shadow-2xl">
-      <CardContent className="p-4">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-neon-green shadow-[0_0_8px_rgba(57,255,20,0.6)]" />
-            <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">مباراة {match.id}</span>
-          </div>
-          {match.round === 3 && (
-            <Badge className="bg-neon-accent/10 text-neon-accent border-neon-accent/20 text-[10px] uppercase font-black">النهائي</Badge>
-          )}
+    <GlowCard 
+      glowColor={isBracket ? "blue" : "green"} 
+      customSize={true} 
+      className={cn(
+        "overflow-hidden bg-black/60 border border-white/10 transition-all duration-300 rounded-xl group w-full shadow-2xl p-4",
+        isBracket ? "hover:border-blue-400/40" : "hover:border-neon-green/40"
+      )}
+    >
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <div className={cn(
+            "w-1.5 h-1.5 rounded-full shadow-[0_0_8px_rgba(79,172,254,0.6)]",
+            isBracket ? "bg-[#4facfe]" : "bg-neon-green"
+          )} />
+          <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">مباراة {match.id}</span>
         </div>
-        
-        <div className="space-y-3">
-          {[team1, team2].map((team, idx) => {
-            const score = idx === 0 ? match.score1 : match.score2;
-            const otherScore = idx === 0 ? match.score2 : match.score1;
-            const isWinner = score > otherScore;
+        {match.round === 3 && (
+          <Badge className="bg-blue-500/10 text-blue-400 border-blue-500/20 text-[10px] uppercase font-black">النهائي</Badge>
+        )}
+      </div>
+      
+      <div className="space-y-3">
+        {[team1, team2].map((team, idx) => {
+          const score = idx === 0 ? match.score1 : match.score2;
+          const otherScore = idx === 0 ? match.score2 : match.score1;
+          const isWinner = score > otherScore;
 
-            return (
-              <div key={idx} className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <Avatar className="w-8 h-8 md:w-10 md:h-10 border border-white/10 bg-white/5">
-                    <AvatarImage src={team?.logo} />
-                    <AvatarFallback className="text-[10px] text-white/40">{team?.name[0]}</AvatarFallback>
-                  </Avatar>
-                  <span className={cn(
-                    "text-sm md:text-base font-bold uppercase tracking-tight transition-colors",
-                    isWinner ? "text-white" : "text-white/40"
-                  )}>
-                    {team?.name || 'قيد الانتظار'}
-                  </span>
-                </div>
+          return (
+            <div key={idx} className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Avatar className="w-8 h-8 md:w-10 md:h-10 border border-white/10 bg-white/5">
+                  <AvatarImage src={team?.logo} />
+                  <AvatarFallback className="text-[10px] text-white/40">{team?.name[0]}</AvatarFallback>
+                </Avatar>
                 <span className={cn(
-                  "text-lg md:text-2xl font-black tabular-nums",
-                  isWinner ? "text-neon-green" : "text-white/20"
+                  "text-sm md:text-base font-bold uppercase tracking-tight transition-colors",
+                  isWinner ? "text-white" : "text-white/40"
                 )}>
-                  {score ?? '--'}
+                  {team?.name || 'قيد الانتظار'}
                 </span>
               </div>
-            );
-          })}
-        </div>
-      </CardContent>
-    </Card>
+              <span className={cn(
+                "text-lg md:text-2xl font-black tabular-nums",
+                isWinner ? (isBracket ? "text-[#4facfe]" : "text-neon-green") : "text-white/20"
+              )}>
+                {score ?? '--'}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </GlowCard>
   );
 };
 
@@ -261,7 +272,7 @@ export default function App() {
   return (
     <div className={cn(
       "min-h-screen text-white font-sans selection:bg-neon-green selection:text-white overflow-x-hidden transition-colors duration-500",
-      activeTab === 'bracket' ? "bg-[#0a2a1a]" : "bg-[#020a06]"
+      activeTab === 'bracket' ? "bg-[#010d07]" : "bg-[#020a06]"
     )}>
       {/* Background Silk Effect - Only on Home */}
       {activeTab === 'home' && (
@@ -383,7 +394,10 @@ export default function App() {
                     <ZoomOut className="w-4 h-4 text-white/70" />
                   </button>
                   <div className="px-2 min-w-[3.5rem] text-center">
-                    <span className="text-[10px] font-mono font-bold text-neon-green">
+                    <span className={cn(
+                      "text-[10px] font-mono font-bold",
+                      activeTab === 'bracket' ? "text-blue-400" : "text-neon-green"
+                    )}>
                       {Math.round(zoom * 100)}%
                     </span>
                   </div>
@@ -466,13 +480,14 @@ export default function App() {
             </TabsContent>
 
             <TabsContent key="bracket" value="bracket" className="mt-0 outline-none w-full">
-              <div className="bg-[#062c1a] min-h-screen relative overflow-hidden">
-                <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
+              <div className="min-h-screen relative overflow-hidden border-t border-blue-500/20">
+                <LiquidAurora />
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
                 
                 <div className="relative z-10 h-full flex flex-col">
                   <div className="text-center w-full py-6 md:py-20">
-                    <h2 className="text-3xl md:text-8xl font-black uppercase tracking-tighter text-white drop-shadow-2xl">المرحلة النهائية</h2>
-                    <div className="h-1 w-24 md:w-32 bg-neon-green mx-auto mt-4 md:mt-6 rounded-full" />
+                    <h2 className="text-3xl md:text-8xl font-black uppercase tracking-tighter text-white drop-shadow-[0_0_30px_rgba(79,172,254,0.3)]">المرحلة النهائية</h2>
+                    <div className="h-1 w-24 md:w-32 bg-gradient-to-r from-[#4facfe] to-[#7028e4] mx-auto mt-4 md:mt-6 rounded-full shadow-[0_0_15px_rgba(79,172,254,0.5)]" />
                   </div>
 
                   <div 
@@ -498,8 +513,8 @@ export default function App() {
                         {/* Column 3: Grand Final */}
                         <div className="flex flex-col items-center justify-center px-8">
                           <div className="mb-12 text-center">
-                            <Trophy className="w-16 h-16 text-neon-accent mx-auto mb-4 drop-shadow-[0_0_30px_rgba(163,255,0,0.4)]" />
-                            <h3 className="text-xl md:text-3xl font-black italic tracking-tighter text-neon-accent uppercase">النهائي</h3>
+                            <Trophy className="w-16 h-16 text-[#4facfe] mx-auto mb-4 drop-shadow-[0_0_30px_rgba(79,172,254,0.4)]" />
+                            <h3 className="text-xl md:text-3xl font-black italic tracking-tighter text-[#4facfe] uppercase">النهائي</h3>
                           </div>
                           <div className="w-full max-w-[450px]">
                             <MatchCard match={round3Matches[0]} teams={TEAMS} />
@@ -536,10 +551,12 @@ export default function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.02 }}
                   >
-                    <Card className="group relative overflow-hidden glass border-white/10 hover:border-neon-green/50 transition-all duration-500 rounded-xl">
-                      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-neon-green to-neon-light opacity-0 group-hover:opacity-100 transition-opacity" />
-                      
-                      <CardHeader className="p-3 relative">
+                    <GlowCard 
+                      glowColor="green" 
+                      customSize={true} 
+                      className="group relative overflow-hidden bg-black/60 border border-white/10 hover:border-neon-green/50 transition-all duration-500 rounded-xl p-3"
+                    >
+                      <div className="relative">
                         <div className="flex justify-between items-start">
                           <Badge className="bg-white/10 text-white/70 border-none font-mono text-[8px] px-1.5 py-0">
                             الترتيب #{idx + 1}
@@ -548,15 +565,15 @@ export default function App() {
                             <Users className="w-3 h-3" />
                           </div>
                         </div>
-                        <CardTitle className="text-base font-bold mt-2 tracking-tight text-white group-hover:text-neon-green transition-colors">
+                        <h3 className="text-base font-bold mt-2 tracking-tight text-white group-hover:text-neon-green transition-colors">
                           {team.name}
-                        </CardTitle>
-                        <CardDescription className="text-white/30 font-mono text-[8px] uppercase tracking-widest">
+                        </h3>
+                        <p className="text-white/30 font-mono text-[8px] uppercase tracking-widest">
                           فريق ثنائي محترف
-                        </CardDescription>
-                      </CardHeader>
+                        </p>
+                      </div>
                       
-                      <CardContent className="p-3 pt-0 relative">
+                      <div className="mt-3 relative">
                         <div className="space-y-1.5">
                           {team.players.map((player, pIdx) => (
                             <div key={player.id} className="flex items-center gap-2 p-1.5 rounded-lg bg-white/5 border border-white/5 group-hover:border-white/10 transition-all">
@@ -574,13 +591,13 @@ export default function App() {
                             </div>
                           ))}
                         </div>
-                      </CardContent>
+                      </div>
                       
                       {/* Decorative background number */}
                       <span className="absolute -bottom-2 -right-1 text-6xl font-black text-white/[0.02] italic pointer-events-none">
                         {idx + 1}
                       </span>
-                    </Card>
+                    </GlowCard>
                   </motion.div>
                 ))}
               </motion.div>
@@ -598,7 +615,12 @@ export default function App() {
             exit={{ opacity: 0, y: 30 }}
             className="fixed bottom-20 left-1/2 -translate-x-1/2 z-[60] w-[85%] max-w-[220px]"
           >
-            <div className="bg-neon-green/90 backdrop-blur-xl p-2 rounded-xl border border-white/20 shadow-[0_0_20px_rgba(4,129,64,0.4)] flex items-center gap-2">
+            <div className={cn(
+              "backdrop-blur-xl p-2 rounded-xl border border-white/20 flex items-center gap-2",
+              activeTab === 'bracket' 
+                ? "bg-blue-600/90 shadow-[0_0_20px_rgba(37,99,235,0.4)]" 
+                : "bg-neon-green/90 shadow-[0_0_20px_rgba(4,129,64,0.4)]"
+            )}>
               <button 
                 onClick={async () => {
                   try {
