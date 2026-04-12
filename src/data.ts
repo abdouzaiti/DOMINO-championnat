@@ -31,7 +31,7 @@ export const TEAMS: Team[] = [
   },
   {
     id: 'team-6',
-    name: ".......",
+    name: "MAZAL",
     players: [{ id: 'p6-1', name: "....." }, { id: 'p6-2', name: "......" }]
   },
   {
