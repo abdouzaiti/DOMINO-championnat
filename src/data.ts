@@ -12,7 +12,7 @@ export const TEAMS: Team[] = [
   {
     id: 'team-2',
     name: "Domino Warriors",
-    players: [{ id: 'p2-1', name: "Thomas Bernard" }, { id: 'p2-2', name: "Julie Petit" }]
+    players: [{ id: 'p2-1', name: "ACHRAF" }, { id: 'p2-2', name: "BAKI" }]
   },
   {
     id: 'team-3',
