@@ -11,7 +11,7 @@ export const TEAMS: Team[] = [
   },
   {
     id: 'team-2',
-    name: "Domino Warriors",
+    name: "ACHREF & BAKI",
     players: [{ id: 'p2-1', name: "ACHRAF" }, { id: 'p2-2', name: "BAKI" }]
   },
   {
@@ -99,8 +99,8 @@ const generateMatches = (): Match[] => {
       round: 2,
       team1Id,
       team2Id,
-      score1,
-      score2,
+      score1: 0,
+      score2: 0,
       winnerId,
       status: 'completed',
       isTwoLegged: false,
