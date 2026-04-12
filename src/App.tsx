@@ -59,10 +59,10 @@ const MatchCard = ({ match, teams }: MatchCardProps) => {
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <div className="w-1.5 h-1.5 rounded-full bg-neon-green shadow-[0_0_8px_rgba(57,255,20,0.6)]" />
-            <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Match {match.id}</span>
+            <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">مباراة {match.id}</span>
           </div>
           {match.round === 3 && (
-            <Badge className="bg-neon-accent/10 text-neon-accent border-neon-accent/20 text-[10px] uppercase font-black">Final</Badge>
+            <Badge className="bg-neon-accent/10 text-neon-accent border-neon-accent/20 text-[10px] uppercase font-black">النهائي</Badge>
           )}
         </div>
         
@@ -83,7 +83,7 @@ const MatchCard = ({ match, teams }: MatchCardProps) => {
                     "text-sm md:text-base font-bold uppercase tracking-tight transition-colors",
                     isWinner ? "text-white" : "text-white/40"
                   )}>
-                    {team?.name || 'TBD'}
+                    {team?.name || 'قيد الانتظار'}
                   </span>
                 </div>
                 <span className={cn(
@@ -161,7 +161,33 @@ export default function App() {
   const [zoom, setZoom] = useState(0.7);
   const [scrollPos, setScrollPos] = useState({ x: 0, y: 0 });
   const [showRotatePrompt, setShowRotatePrompt] = useState(false);
+  const [algeriaTime, setAlgeriaTime] = useState('');
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const options: Intl.DateTimeFormatOptions = {
+        timeZone: 'Africa/Algiers',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      };
+      const timeString = new Intl.DateTimeFormat('en-GB', options).format(now);
+      const dateString = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Africa/Algiers',
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      }).format(now);
+      setAlgeriaTime(`${dateString} // ${timeString}`);
+    };
+
+    updateTime();
+    const timer = setInterval(updateTime, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const target = e.currentTarget;
@@ -278,29 +304,29 @@ export default function App() {
                 </div>
                 <div>
                   <h1 className="text-lg md:text-2xl font-black tracking-tighter italic bg-gradient-to-r from-neon-green via-white to-neon-light bg-clip-text text-transparent">
-                    DOMINO CHAMP
+                    بطل الدومينو
                   </h1>
                   <div className="flex items-center gap-2">
                     <span className="h-1 w-1 md:h-1.5 md:w-1.5 rounded-full bg-neon-green animate-pulse" />
-                    <p className="text-[8px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.3em] font-bold text-white/70">Elite Series 2026</p>
+                    <p className="text-[8px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.3em] font-bold text-white/70">سلسلة النخبة 2026</p>
                   </div>
                 </div>
               </div>
               
               <div className="hidden lg:flex items-center gap-8">
                 <div className="flex flex-col items-end">
-                  <span className="text-[10px] uppercase tracking-widest text-white/60 font-bold">Local Time</span>
+                  <span className="text-[10px] uppercase tracking-widest text-white/60 font-bold">الوقت المحلي (الجزائر)</span>
                   <div className="flex items-center gap-2 text-sm font-mono text-neon-green">
                     <Calendar className="w-4 h-4" />
-                    <span>10.04.2026</span>
+                    <span>{algeriaTime}</span>
                   </div>
                 </div>
                 <div className="h-8 w-px bg-white/10" />
                 <div className="flex flex-col items-end">
-                  <span className="text-[10px] uppercase tracking-widest text-white/60 font-bold">Main Venue</span>
+                  <span className="text-[10px] uppercase tracking-widest text-white/60 font-bold">المكان الرئيسي</span>
                   <div className="flex items-center gap-2 text-sm font-bold text-neon-light">
                     <Trophy className="w-4 h-4" />
-                    <span>NEON ARENA</span>
+                    <span>ليناس</span>
                   </div>
                 </div>
               </div>
@@ -334,15 +360,15 @@ export default function App() {
                       value="bracket" 
                       className="px-4 md:px-8 h-9 md:h-11 rounded-lg md:rounded-xl data-active:bg-neon-green data-active:text-white data-active:shadow-[0_0_20px_rgba(4,129,64,0.3)] transition-all duration-300 text-xs md:text-sm"
                     >
-                      <Trophy className="w-3.5 h-3.5 md:w-4 md:h-4 mr-2" />
-                      Tableau
+                      <Trophy className="w-3.5 h-3.5 md:w-4 md:h-4 ml-2" />
+                      الجدول
                     </TabsTrigger>
                     <TabsTrigger 
                       value="teams" 
                       className="px-4 md:px-8 h-9 md:h-11 rounded-lg md:rounded-xl data-active:bg-neon-green data-active:text-white data-active:shadow-[0_0_20px_rgba(4,129,64,0.3)] transition-all duration-300 text-xs md:text-sm"
                     >
-                      <Users className="w-3.5 h-3.5 md:w-4 md:h-4 mr-2" />
-                      Équipes
+                      <Users className="w-3.5 h-3.5 md:w-4 md:h-4 ml-2" />
+                      الفرق
                     </TabsTrigger>
                   </TabsList>
                 </ScrollArea>
@@ -352,7 +378,7 @@ export default function App() {
                   <button 
                     onClick={() => setZoom(prev => Math.max(0.5, prev - 0.1))}
                     className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                    title="Zoom Out"
+                    title="تصغير"
                   >
                     <ZoomOut className="w-4 h-4 text-white/70" />
                   </button>
@@ -364,7 +390,7 @@ export default function App() {
                   <button 
                     onClick={() => setZoom(prev => Math.min(1.5, prev + 0.1))}
                     className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                    title="Zoom In"
+                    title="تكبير"
                   >
                     <ZoomIn className="w-4 h-4 text-white/70" />
                   </button>
@@ -372,7 +398,7 @@ export default function App() {
                   <button 
                     onClick={() => setZoom(1)}
                     className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                    title="Reset Zoom"
+                    title="إعادة ضبط العرض"
                   >
                     <Maximize className="w-4 h-4 text-white/70" />
                   </button>
@@ -384,7 +410,7 @@ export default function App() {
                   <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 group-focus-within:text-neon-green transition-colors" />
                   <input 
                     type="text" 
-                    placeholder="Search team or player..." 
+                    placeholder="ابحث عن فريق أو لاعب..." 
                     className="w-full pl-12 pr-6 py-3 bg-white/5 border border-white/10 rounded-xl md:rounded-2xl text-sm focus:outline-none focus:border-neon-green/50 focus:bg-white/10 transition-all backdrop-blur-sm"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
@@ -413,12 +439,12 @@ export default function App() {
                 </motion.div>
 
                 <h2 className="text-4xl md:text-8xl font-black italic tracking-tighter mb-6 md:mb-8 bg-gradient-to-b from-white via-white to-white/20 bg-clip-text text-transparent leading-[1.1]">
-                  DOMINO CHAMPIONSHIP
+                  بطولة الدومينو
                 </h2>
                 
                 <p className="text-lg md:text-2xl text-white/80 font-medium mb-10 md:mb-12 max-w-2xl leading-relaxed px-4">
-                  Welcome.<br />
-                  Check the latest results and follow the competition.
+                  أهلاً بكم.<br />
+                  تحقق من آخر النتائج وتابع المسابقة.
                 </p>
 
                 <div className="flex flex-col sm:flex-row justify-center gap-4 md:gap-6 w-full px-6 sm:px-0">
@@ -426,13 +452,13 @@ export default function App() {
                     onClick={() => setActiveTab('bracket')}
                     className="w-full sm:w-auto px-10 py-4 md:py-5 bg-neon-green text-white font-black uppercase tracking-widest rounded-xl md:rounded-2xl shadow-[0_0_30px_rgba(4,129,64,0.4)] hover:scale-105 hover:shadow-[0_0_50px_rgba(4,129,64,0.6)] transition-all duration-300 text-sm md:text-base"
                   >
-                    View Bracket
+                    عرض الجدول
                   </button>
                   <button 
                     onClick={() => setActiveTab('teams')}
                     className="w-full sm:w-auto px-10 py-4 md:py-5 bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest rounded-xl md:rounded-2xl hover:bg-white/10 transition-all duration-300 text-sm md:text-base"
                   >
-                    Meet the Teams
+                    تعرف على الفرق
                   </button>
                 </div>
 
@@ -445,7 +471,7 @@ export default function App() {
                 
                 <div className="relative z-10 h-full flex flex-col">
                   <div className="text-center w-full py-6 md:py-20">
-                    <h2 className="text-3xl md:text-8xl font-black uppercase tracking-tighter text-white drop-shadow-2xl">PHASE FINALE</h2>
+                    <h2 className="text-3xl md:text-8xl font-black uppercase tracking-tighter text-white drop-shadow-2xl">المرحلة النهائية</h2>
                     <div className="h-1 w-24 md:w-32 bg-neon-green mx-auto mt-4 md:mt-6 rounded-full" />
                   </div>
 
@@ -461,19 +487,19 @@ export default function App() {
                       <div className="grid grid-cols-5 gap-8 items-center w-full">
                         {/* Column 1: Quarts A */}
                         <div className="flex justify-center">
-                          <BracketColumn title="QUARTS (A)" matches={leftQuarts} teams={TEAMS} side="left" />
+                          <BracketColumn title="ربع النهائي (أ)" matches={leftQuarts} teams={TEAMS} side="left" />
                         </div>
 
                         {/* Column 2: Demi A */}
                         <div className="flex justify-center">
-                          <BracketColumn title="DEMI-FINALE" matches={leftSemi} teams={TEAMS} side="left" />
+                          <BracketColumn title="نصف النهائي" matches={leftSemi} teams={TEAMS} side="left" />
                         </div>
 
                         {/* Column 3: Grand Final */}
                         <div className="flex flex-col items-center justify-center px-8">
                           <div className="mb-12 text-center">
                             <Trophy className="w-16 h-16 text-neon-accent mx-auto mb-4 drop-shadow-[0_0_30px_rgba(163,255,0,0.4)]" />
-                            <h3 className="text-xl md:text-3xl font-black italic tracking-tighter text-neon-accent uppercase">LA FINALE</h3>
+                            <h3 className="text-xl md:text-3xl font-black italic tracking-tighter text-neon-accent uppercase">النهائي</h3>
                           </div>
                           <div className="w-full max-w-[450px]">
                             <MatchCard match={round3Matches[0]} teams={TEAMS} />
@@ -482,12 +508,12 @@ export default function App() {
 
                         {/* Column 4: Demi B */}
                         <div className="flex justify-center">
-                          <BracketColumn title="DEMI-FINALE" matches={rightSemi} teams={TEAMS} side="right" />
+                          <BracketColumn title="نصف النهائي" matches={rightSemi} teams={TEAMS} side="right" />
                         </div>
 
                         {/* Column 5: Quarts B */}
                         <div className="flex justify-center">
-                          <BracketColumn title="QUARTS (B)" matches={rightQuarts} teams={TEAMS} side="right" />
+                          <BracketColumn title="ربع النهائي (ب)" matches={rightQuarts} teams={TEAMS} side="right" />
                         </div>
                       </div>
                     </div>
@@ -516,7 +542,7 @@ export default function App() {
                       <CardHeader className="p-3 relative">
                         <div className="flex justify-between items-start">
                           <Badge className="bg-white/10 text-white/70 border-none font-mono text-[8px] px-1.5 py-0">
-                            RANK #{idx + 1}
+                            الترتيب #{idx + 1}
                           </Badge>
                           <div className="p-1.5 bg-white/5 rounded-lg group-hover:bg-neon-green group-hover:text-white transition-all duration-300">
                             <Users className="w-3 h-3" />
@@ -526,7 +552,7 @@ export default function App() {
                           {team.name}
                         </CardTitle>
                         <CardDescription className="text-white/30 font-mono text-[8px] uppercase tracking-widest">
-                          Pro Duo Team
+                          فريق ثنائي محترف
                         </CardDescription>
                       </CardHeader>
                       
@@ -594,10 +620,10 @@ export default function App() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-white font-black text-[9px] uppercase tracking-wider leading-tight truncate">
-                    Rotate phone
+                    قم بتدوير الهاتف
                   </p>
                   <p className="text-white/80 text-[7px] font-medium uppercase tracking-tight truncate">
-                    Click for best view
+                    انقر للحصول على أفضل عرض
                   </p>
                 </div>
               </button>
@@ -629,21 +655,21 @@ export default function App() {
             <button 
               onClick={() => setZoom(prev => Math.min(prev + 0.05, 1.5))}
               className="p-2 bg-white/5 backdrop-blur-md hover:bg-white/10 rounded-full border border-white/5 transition-all shadow-lg group"
-              title="Zoom In"
+              title="تكبير"
             >
               <ZoomIn className="w-4 h-4 text-white/60 group-hover:text-white transition-colors" />
             </button>
             <button 
               onClick={() => setZoom(prev => Math.max(prev - 0.05, 0.25))}
               className="p-2 bg-white/5 backdrop-blur-md hover:bg-white/10 rounded-full border border-white/5 transition-all shadow-lg group"
-              title="Zoom Out"
+              title="تصغير"
             >
               <ZoomOut className="w-4 h-4 text-white/60 group-hover:text-white transition-colors" />
             </button>
             <button 
               onClick={resetView}
               className="p-2 bg-white/5 backdrop-blur-md hover:bg-white/10 rounded-full border border-white/5 transition-all shadow-lg group"
-              title="Reset View"
+              title="إعادة ضبط العرض"
             >
               <Maximize className="w-4 h-4 text-white/60 group-hover:text-white transition-colors" />
             </button>
@@ -656,7 +682,7 @@ export default function App() {
         <footer className="mt-32 border-t border-white/10 bg-[#020a06]/90 backdrop-blur-xl py-16">
           <div className="container mx-auto px-4 text-center">
             <div className="text-[10px] font-mono text-white/20 uppercase tracking-widest">
-              © 2026 NEON DOMINO FEDERATION // ALL RIGHTS RESERVED
+              © 2026 اتحاد نيون للدومينو // جميع الحقوق محفوظة
             </div>
           </div>
         </footer>
@@ -674,7 +700,7 @@ export default function App() {
             <button 
               onClick={() => setActiveTab(activeTab === 'home' ? 'bracket' : 'home')}
               className="w-12 h-12 glass border-white/10 text-white rounded-xl flex items-center justify-center hover:bg-white/10 transition-all shadow-xl"
-              title={activeTab === 'home' ? "View Bracket" : "Back to Home"}
+              title={activeTab === 'home' ? "عرض الجدول" : "العودة للرئيسية"}
             >
               {activeTab === 'home' ? <Trophy className="w-5 h-5" /> : <LayoutGrid className="w-5 h-5" />}
             </button>
