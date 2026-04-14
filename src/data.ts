@@ -57,7 +57,7 @@ const generateMatches = (): Match[] => {
   
   // Round 1 scores provided by user
   const round1Scores = [
-    { s1: 0, s2: 0, status: 'in-progress' as const },   // Match 1: Team 1 vs 2
+    { s1: 69, s2: 25, status: 'completed' as const },   // Match 1: Team 1 vs 2
     { s1: 145, s2: 23, status: 'completed' as const }, // Match 2: Team 3 vs 4
     { s1: 104, s2: 58, status: 'completed' as const }, // Match 3: Team 5 vs 6
     { s1: 8, s2: 102, status: 'completed' as const }   // Match 4: Team 7 vs 8

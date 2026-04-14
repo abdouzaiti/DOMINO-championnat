@@ -7,6 +7,7 @@ import {
   Search,
   Calendar,
   Info,
+  AlertTriangle,
   ZoomIn,
   ZoomOut,
   Maximize,
@@ -450,6 +451,23 @@ export default function App() {
                 >
                   <div className="absolute inset-0 bg-neon-green/20 blur-[60px] md:blur-[100px] rounded-full" />
                   <DominoIcon className="w-32 h-32 md:w-48 md:h-48 text-neon-green relative z-10 drop-shadow-[0_0_30px_rgba(4,129,64,0.5)]" />
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="mb-8 px-6 py-4 bg-red-500/10 border border-red-500/30 rounded-2xl backdrop-blur-md flex flex-col md:flex-row items-center gap-4 max-w-2xl mx-auto shadow-[0_0_20px_rgba(239,68,68,0.1)]"
+                >
+                  <div className="bg-red-500/20 p-2 rounded-full">
+                    <AlertTriangle className="w-6 h-6 text-red-500" />
+                  </div>
+                  <div className="text-center md:text-right">
+                    <h3 className="text-red-400 font-black text-sm uppercase tracking-widest mb-1">توقف مؤقت للمنافسات</h3>
+                    <p className="text-white/90 text-sm md:text-base font-bold leading-relaxed">
+                      نعتذر لجميع اللاعبين عن توقف المباريات مؤقتاً لظروف قاهرة (إخلاء الـ Foyer). سنوافيكم بموعد الاستئناف فور توفر مكان بديل.
+                    </p>
+                  </div>
                 </motion.div>
 
                 <h2 className="text-4xl md:text-8xl font-black italic tracking-tighter mb-6 md:mb-8 bg-gradient-to-b from-white via-white to-white/20 bg-clip-text text-transparent leading-[1.1]">
