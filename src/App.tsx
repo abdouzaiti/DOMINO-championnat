@@ -482,7 +482,6 @@ export default function App() {
             <TabsContent key="bracket" value="bracket" className="mt-0 outline-none w-full">
               <div className="min-h-screen relative overflow-hidden border-t border-blue-500/20">
                 <LiquidAurora />
-                <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
                 
                 <div className="relative z-10 h-full flex flex-col">
                   <div className="text-center w-full py-6 md:py-20">
