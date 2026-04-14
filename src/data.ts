@@ -55,60 +55,51 @@ export const TEAMS: Team[] = [
 const generateMatches = (): Match[] => {
   const matches: Match[] = [];
   
-  // Round 1 (8 teams -> 4 matches) - Quarter Finals (SINGLE MATCH - 100 pts)
+  // Round 1 scores provided by user
+  const round1Scores = [
+    { s1: 0, s2: 0, status: 'in-progress' as const },   // Match 1: Team 1 vs 2
+    { s1: 145, s2: 23, status: 'completed' as const }, // Match 2: Team 3 vs 4
+    { s1: 104, s2: 58, status: 'completed' as const }, // Match 3: Team 5 vs 6
+    { s1: 8, s2: 102, status: 'completed' as const }   // Match 4: Team 7 vs 8
+  ];
+
   for (let i = 0; i < 4; i++) {
-    const winnerScore = 100;
-    const loserScore = Math.floor(Math.random() * 40) + 60; // 60-99
-    
-    const team1Wins = Math.random() > 0.5;
-    const score1 = team1Wins ? winnerScore : loserScore;
-    const score2 = team1Wins ? loserScore : winnerScore;
-    const winnerId = team1Wins ? TEAMS[i * 2].id : TEAMS[i * 2 + 1].id;
+    const { s1, s2, status } = round1Scores[i];
+    const winnerId = status === 'completed' ? (s1 > s2 ? TEAMS[i * 2].id : TEAMS[i * 2 + 1].id) : undefined;
     
     matches.push({
       id: `m-${i + 1}`,
       round: 1,
       team1Id: TEAMS[i * 2].id,
       team2Id: TEAMS[i * 2 + 1].id,
-      score1: 0,
-      score2: 0,
+      score1: s1,
+      score2: s2,
       winnerId,
-      status: 'completed',
+      status,
       isTwoLegged: false,
       nextMatchId: `m-${4 + Math.floor(i / 2) + 1}`,
     });
   }
 
-  // Round 2 (4 teams -> 2 matches) - Semi Finals (SINGLE MATCH - 100 pts)
+  // Round 2 (4 teams -> 2 matches) - Semi Finals
   for (let i = 0; i < 2; i++) {
     const match1 = matches[i * 2];
     const match2 = matches[i * 2 + 1];
-    const team1Id = match1.winnerId;
-    const team2Id = match2.winnerId;
     
-    const winnerScore = 100;
-    const loserScore = Math.floor(Math.random() * 40) + 60;
-    
-    const team1Wins = Math.random() > 0.5;
-    const score1 = team1Wins ? winnerScore : loserScore;
-    const score2 = team1Wins ? loserScore : winnerScore;
-    const winnerId = score1 > score2 ? team1Id : team2Id;
-
     matches.push({
       id: `m-${4 + i + 1}`,
       round: 2,
-      team1Id,
-      team2Id,
+      team1Id: match1.winnerId,
+      team2Id: match2.winnerId,
       score1: 0,
       score2: 0,
-      winnerId,
-      status: 'completed',
+      status: 'in-progress',
       isTwoLegged: false,
       nextMatchId: `m-7`,
     });
   }
 
-  // Round 3 (Final) - SINGLE MATCH - 150 pts
+  // Round 3 (Final)
   const semi1 = matches[4];
   const semi2 = matches[5];
   
