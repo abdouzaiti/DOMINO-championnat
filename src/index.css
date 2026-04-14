@@ -42,15 +42,17 @@
 
   .liquid-shape {
     position: absolute;
-    filter: blur(80px);
+    filter: blur(60px);
     mix-blend-mode: screen;
     animation: morph 20s infinite alternate ease-in-out;
     opacity: 0.4;
   }
 
   .shape-1 {
-    width: 600px;
-    height: 600px;
+    width: 80vw;
+    height: 80vw;
+    max-width: 600px;
+    max-height: 600px;
     background: #4facfe;
     top: -10%;
     left: -10%;
@@ -58,8 +60,10 @@
   }
 
   .shape-2 {
-    width: 500px;
-    height: 500px;
+    width: 70vw;
+    height: 70vw;
+    max-width: 500px;
+    max-height: 500px;
     background: #00f2fe;
     bottom: -10%;
     right: -10%;
@@ -68,8 +72,10 @@
   }
 
   .shape-3 {
-    width: 450px;
-    height: 450px;
+    width: 60vw;
+    height: 60vw;
+    max-width: 450px;
+    max-height: 450px;
     background: #7028e4;
     top: 40%;
     right: 10%;
