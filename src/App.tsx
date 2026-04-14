@@ -434,47 +434,46 @@ export default function App() {
               )}
             </div>
           )}
-
           <AnimatePresence mode="wait">
             <TabsContent key="home" value="home" className="mt-0 outline-none">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="flex flex-col items-center text-center py-12 md:py-20 max-w-4xl mx-auto min-h-[80vh] justify-center"
+                className="flex flex-col items-center text-center py-6 md:py-20 max-w-4xl mx-auto min-h-[calc(100vh-120px)] md:min-h-[80vh] justify-center px-4 overflow-hidden"
               >
                 <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="mb-8 md:mb-12 relative"
+                  className="mb-4 md:mb-12 relative"
                 >
-                  <div className="absolute inset-0 bg-neon-green/20 blur-[60px] md:blur-[100px] rounded-full" />
-                  <DominoIcon className="w-32 h-32 md:w-48 md:h-48 text-neon-green relative z-10 drop-shadow-[0_0_30px_rgba(4,129,64,0.5)]" />
+                  <div className="absolute inset-0 bg-neon-green/20 blur-[40px] md:blur-[100px] rounded-full" />
+                  <DominoIcon className="w-24 h-24 md:w-48 md:h-48 text-neon-green relative z-10 drop-shadow-[0_0_30px_rgba(4,129,64,0.5)]" />
                 </motion.div>
 
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
-                  className="mb-8 px-6 py-4 bg-red-500/10 border border-red-500/30 rounded-2xl backdrop-blur-md flex flex-col md:flex-row items-center gap-4 max-w-2xl mx-auto shadow-[0_0_20px_rgba(239,68,68,0.1)]"
+                  className="mb-6 px-4 py-3 bg-red-500/10 border border-red-500/30 rounded-xl backdrop-blur-md flex flex-col md:flex-row items-center gap-3 max-w-2xl mx-auto shadow-[0_0_20px_rgba(239,68,68,0.1)]"
                 >
-                  <div className="bg-red-500/20 p-2 rounded-full">
-                    <AlertTriangle className="w-6 h-6 text-red-500" />
+                  <div className="bg-red-500/20 p-1.5 rounded-full shrink-0">
+                    <AlertTriangle className="w-5 h-5 text-red-500" />
                   </div>
                   <div className="text-center md:text-right">
-                    <h3 className="text-red-400 font-black text-sm uppercase tracking-widest mb-1">توقف مؤقت للمنافسات</h3>
-                    <p className="text-white/90 text-sm md:text-base font-bold leading-relaxed">
-                      نعتذر لجميع اللاعبين عن توقف المباريات مؤقتاً لظروف قاهرة (إخلاء الـ Foyer). سنوافيكم بموعد الاستئناف فور توفر مكان بديل.
+                    <h3 className="text-red-400 font-black text-[10px] md:text-sm uppercase tracking-widest mb-0.5">توقف مؤقت للمنافسات</h3>
+                    <p className="text-white/90 text-[11px] md:text-base font-bold leading-tight">
+                      نعتذر عن توقف المباريات مؤقتاً (إخلاء الـ Foyer). سنوافيكم بالجديد قريباً.
                     </p>
                   </div>
                 </motion.div>
 
-                <h2 className="text-4xl md:text-8xl font-black italic tracking-tighter mb-6 md:mb-8 bg-gradient-to-b from-white via-white to-white/20 bg-clip-text text-transparent leading-[1.1]">
+                <h2 className="text-3xl md:text-8xl font-black italic tracking-tighter mb-4 md:mb-8 bg-gradient-to-b from-white via-white to-white/20 bg-clip-text text-transparent leading-[1.1] uppercase">
                   TOURNOIS DE DOMINO
                 </h2>
                 
-                <p className="text-lg md:text-2xl text-white/80 font-medium mb-10 md:mb-12 max-w-2xl leading-relaxed px-4">
+                <p className="text-base md:text-2xl text-white/80 font-medium mb-8 md:mb-12 max-w-2xl leading-relaxed">
                   أهلاً بكم.<br />
                   تحقق من آخر النتائج وتابع المسابقة.
                 </p>
@@ -716,12 +715,12 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Footer - Hidden on Bracket */}
-      {activeTab !== 'bracket' && (
+      {/* Footer - Removed copyright as per request */}
+      {activeTab !== 'bracket' && activeTab !== 'home' && (
         <footer className="mt-32 border-t border-white/10 bg-[#020a06]/90 backdrop-blur-xl py-16">
           <div className="container mx-auto px-4 text-center">
             <div className="text-[10px] font-mono text-white/20 uppercase tracking-widest">
-              © 2026 اتحاد نيون للدومينو // جميع الحقوق محفوظة
+              اتحاد نيون للدومينو // 2026
             </div>
           </div>
         </footer>
