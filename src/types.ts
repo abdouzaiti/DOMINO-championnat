@@ -23,6 +23,7 @@ export interface Match {
   status: 'pending' | 'in-progress' | 'completed';
   nextMatchId?: string;
   isTwoLegged?: boolean;
+  note?: string;
 }
 
 export interface Championship {

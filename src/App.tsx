@@ -73,6 +73,11 @@ const MatchCard = ({ match, teams }: MatchCardProps) => {
             isBracket ? "bg-[#4facfe]" : "bg-neon-green"
           )} />
           <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">مباراة {match.id}</span>
+          {match.note && (
+            <span className="text-[9px] text-red-500/60 italic font-medium border-r border-white/10 pr-2 mr-2">
+              {match.note}
+            </span>
+          )}
         </div>
         {match.round === 3 && (
           <Badge className="bg-blue-500/10 text-blue-400 border-blue-500/20 text-[10px] uppercase font-black">النهائي</Badge>
@@ -456,15 +461,15 @@ export default function App() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
-                  className="mb-6 px-4 py-3 bg-red-500/10 border border-red-500/30 rounded-xl backdrop-blur-md flex flex-col md:flex-row items-center gap-3 max-w-2xl mx-auto shadow-[0_0_20px_rgba(239,68,68,0.1)]"
+                  className="mb-6 px-4 py-3 bg-blue-500/10 border border-blue-500/30 rounded-xl backdrop-blur-md flex flex-col md:flex-row items-center gap-3 max-w-2xl mx-auto shadow-[0_0_20px_rgba(59,130,246,0.1)]"
                 >
-                  <div className="bg-red-500/20 p-1.5 rounded-full shrink-0">
-                    <AlertTriangle className="w-5 h-5 text-red-500" />
+                  <div className="bg-blue-500/20 p-1.5 rounded-full shrink-0">
+                    <AlertTriangle className="w-5 h-5 text-blue-500" />
                   </div>
                   <div className="text-center md:text-right">
-                    <h3 className="text-red-400 font-black text-[10px] md:text-sm uppercase tracking-widest mb-0.5">توقف مؤقت للمنافسات</h3>
+                    <h3 className="text-blue-400 font-black text-[10px] md:text-sm uppercase tracking-widest mb-0.5">تحديث موعد الاستئناف</h3>
                     <p className="text-white/90 text-[11px] md:text-base font-bold leading-tight">
-                      نعتذر عن توقف المباريات مؤقتاً (إخلاء الـ Foyer). سنوافيكم بالجديد قريباً.
+                      تم تعليق استئناف البطولة حالياً، وسنعود لاستكمال المنافسات يوم الأحد المقبل إن شاء الله. كونوا في الموعد!
                     </p>
                   </div>
                 </motion.div>

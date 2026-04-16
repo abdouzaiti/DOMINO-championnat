@@ -57,14 +57,14 @@ const generateMatches = (): Match[] => {
   
   // Round 1 scores provided by user
   const round1Scores = [
-    { s1: 69, s2: 25, status: 'completed' as const },   // Match 1: Team 1 vs 2
+    { s1: 100, s2: 25, status: 'completed' as const, note: 'لقد أطالوا جداً عن الموعد' },   // Match 1: Team 1 vs 2
     { s1: 145, s2: 23, status: 'completed' as const }, // Match 2: Team 3 vs 4
     { s1: 104, s2: 58, status: 'completed' as const }, // Match 3: Team 5 vs 6
     { s1: 8, s2: 102, status: 'completed' as const }   // Match 4: Team 7 vs 8
   ];
 
   for (let i = 0; i < 4; i++) {
-    const { s1, s2, status } = round1Scores[i];
+    const { s1, s2, status, note } = round1Scores[i] as any;
     const winnerId = status === 'completed' ? (s1 > s2 ? TEAMS[i * 2].id : TEAMS[i * 2 + 1].id) : undefined;
     
     matches.push({
@@ -78,6 +78,7 @@ const generateMatches = (): Match[] => {
       status,
       isTwoLegged: false,
       nextMatchId: `m-${4 + Math.floor(i / 2) + 1}`,
+      note
     });
   }
 
