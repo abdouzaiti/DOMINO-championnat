@@ -83,18 +83,26 @@ const generateMatches = (): Match[] => {
   }
 
   // Round 2 (4 teams -> 2 matches) - Semi Finals
+  const round2Scores = [
+    { s1: 102, s2: 49, status: 'completed' as const }, // m-5: Winner of m-1 vs Winner of m-2
+    { s1: 0, s2: 0, status: 'in-progress' as const },   // m-6: Winner of m-3 vs Winner of m-4
+  ];
+
   for (let i = 0; i < 2; i++) {
     const match1 = matches[i * 2];
     const match2 = matches[i * 2 + 1];
+    const { s1, s2, status } = round2Scores[i];
+    const winnerId = status === 'completed' ? (s1 > s2 ? match1.winnerId : match2.winnerId) : undefined;
     
     matches.push({
       id: `m-${4 + i + 1}`,
       round: 2,
       team1Id: match1.winnerId,
       team2Id: match2.winnerId,
-      score1: 0,
-      score2: 0,
-      status: 'in-progress',
+      score1: s1,
+      score2: s2,
+      winnerId,
+      status,
       isTwoLegged: false,
       nextMatchId: `m-7`,
     });
