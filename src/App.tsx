@@ -457,22 +457,6 @@ export default function App() {
                   <DominoIcon className="w-24 h-24 md:w-48 md:h-48 text-neon-green relative z-10 drop-shadow-[0_0_30px_rgba(4,129,64,0.5)]" />
                 </motion.div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="mb-6 px-4 py-3 bg-blue-500/10 border border-blue-500/30 rounded-xl backdrop-blur-md flex flex-col md:flex-row items-center gap-3 max-w-2xl mx-auto shadow-[0_0_20px_rgba(59,130,246,0.1)]"
-                >
-                  <div className="bg-blue-500/20 p-1.5 rounded-full shrink-0">
-                    <AlertTriangle className="w-5 h-5 text-blue-500" />
-                  </div>
-                  <div className="text-center md:text-right">
-                    <h3 className="text-blue-400 font-black text-[10px] md:text-sm uppercase tracking-widest mb-0.5">تحديث موعد الاستئناف</h3>
-                    <p className="text-white/90 text-[11px] md:text-base font-bold leading-tight">
-                      تم تعليق استئناف البطولة حالياً، وسنعود لاستكمال المنافسات يوم الأحد المقبل إن شاء الله. كونوا في الموعد!
-                    </p>
-                  </div>
-                </motion.div>
 
                 <h2 className="text-3xl md:text-8xl font-black italic tracking-tighter mb-4 md:mb-8 bg-gradient-to-b from-white via-white to-white/20 bg-clip-text text-transparent leading-[1.1] uppercase">
                   TOURNOIS DE DOMINO
