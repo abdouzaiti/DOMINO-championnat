@@ -85,7 +85,7 @@ const generateMatches = (): Match[] => {
   // Round 2 (4 teams -> 2 matches) - Semi Finals
   const round2Scores = [
     { s1: 102, s2: 49, status: 'completed' as const }, // m-5: Winner of m-1 vs Winner of m-2
-    { s1: 0, s2: 0, status: 'in-progress' as const },   // m-6: Winner of m-3 vs Winner of m-4
+    { s1: 0, s2: 100, status: 'completed' as const },   // m-6: Winner of m-3 vs Winner of m-4
   ];
 
   for (let i = 0; i < 2; i++) {
