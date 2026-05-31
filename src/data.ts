@@ -117,9 +117,10 @@ const generateMatches = (): Match[] => {
     round: 3,
     team1Id: semi1.winnerId,
     team2Id: semi2.winnerId,
-    status: 'in-progress',
-    score1: 0,
+    status: 'completed',
+    score1: 100,
     score2: 0,
+    winnerId: semi1.winnerId,
     isTwoLegged: false,
   });
 
